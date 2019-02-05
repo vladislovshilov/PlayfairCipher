@@ -87,7 +87,7 @@ class SecondViewController: NSViewController {
 
 extension SecondViewController: NSTextFieldDelegate {
     func controlTextDidChange(_ obj: Notification) {
-        fileName = filePathTextField.stringValue
+        fileName = filePathTextField.stringValue + fileExtension
         configureFileURL()
     }
 }
@@ -96,10 +96,10 @@ extension SecondViewController {
     private func configureFileURL() {
         guard let directoryURL = directoryURL else { return }
         
-        if fileName != "" {
-            let fileNameWithExtension = fileName + fileExtension
-            fileURL = directoryURL.appendingPathComponent(fileNameWithExtension)
+        if fileName != ".txt" {
+            fileURL = directoryURL.appendingPathComponent(fileName)
             pathControl.url = fileURL
+            filePathTextField.stringValue = String(fileName.dropLast(fileExtension.count))
         }
         else {
             pathControl.url = directoryURL
