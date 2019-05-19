@@ -12,9 +12,15 @@ class SecondViewController: NSViewController {
     
     @IBOutlet private weak var openFileButton: NSButton!
     @IBOutlet private weak var saveFileButton: NSButton!
-    @IBOutlet weak var cancelButton: NSButton!
+    @IBOutlet private weak var cancelButton: NSButton!
     @IBOutlet private weak var pathControl: NSPathControl!
     @IBOutlet private weak var filePathTextField: NSTextField!
+    
+    @IBOutlet private weak var passwordCollectionView: NSCollectionView!
+    @IBOutlet private weak var passwordTextField: NSTextField!
+    @IBOutlet private weak var setPasswordButton: NSButton!
+    @IBOutlet private weak var generatePasswordButton: NSButton!
+    
     
     private let fileManager = FileManager.default
     private let fileExtension = ".txt"
@@ -29,13 +35,36 @@ class SecondViewController: NSViewController {
     
     private let testDataToSave = "Test data"
     
+    private var password = ""
+    private lazy var biogramm: [Character] = {
+        let startChar = Unicode.Scalar("A").value
+        let endChar = Unicode.Scalar("Z").value
+
+        var newAlpahbet = [Character]()
+        for alphabet in startChar...endChar {
+            if let scalar = Unicode.Scalar(alphabet), Character(scalar) != "Q" {
+                newAlpahbet.append(Character(scalar))
+            }
+        }
+        print(newAlpahbet)
+
+        return newAlpahbet
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        let paths = fileManager.urls(for: .documentDirectory, in: .userDomainMask)
-        directoryURL = paths.first!
+//        let paths = fileManager.urls(for: .documentDirectory, in: .userDomainMask)
+//        directoryURL = paths.first!
+        directoryURL = nil
         
         pathControl.url = directoryURL
         filePathTextField.delegate = self
+        passwordTextField.delegate = self
+    }
+    
+    override func viewDidAppear() {
+        super.viewDidAppear()
+        configureCollectionView()
     }
     
     @IBAction func openFileButtonDidPress(_ sender: Any) {
@@ -83,14 +112,21 @@ class SecondViewController: NSViewController {
         filePathTextField.stringValue = ""
         filePathTextField.resignFirstResponder()
     }
-}
-
-extension SecondViewController: NSTextFieldDelegate {
-    func controlTextDidChange(_ obj: Notification) {
-        fileName = filePathTextField.stringValue + fileExtension
-        configureFileURL()
+    
+    @IBAction func setPasswordButtonDidPress(_ sender: Any) {
+        password = passwordTextField.stringValue
+        generateBiogramm(with: password)
+        
+        configureCollectionView()
+        passwordCollectionView.reloadData()
+    }
+    
+    @IBAction func generatePasswordButtonDidPress(_ sender: Any) {
+        
     }
 }
+
+// MARK: - Private methods
 
 extension SecondViewController {
     private func configureFileURL() {
@@ -109,4 +145,73 @@ extension SecondViewController {
     private func saveData(_ data: Data, at url: URL) throws {
         try data.write(to: url)
     }
+    
+    // MARK: Generate alphabet
+    private func generateBiogramm(with password: String) {
+        biogramm.removeAll()
+        password.uppercased().forEach { ch in
+            if !biogramm.contains(ch) {
+                biogramm.append(ch)
+            }
+        }
+        
+        let startChar = Unicode.Scalar("A").value
+        let endChar = Unicode.Scalar("Z").value
+        
+        for alphabet in startChar...endChar {
+            if let scalar = Unicode.Scalar(alphabet), !password.uppercased().contains(Character(scalar)), Character(scalar) != "Q" {
+                self.biogramm.append(Character(scalar))
+            }
+        }
+        print(biogramm)
+    }
+    
+    // MARK: - collectionview
+    private func configureCollectionView() {
+        let flowLayout = NSCollectionViewFlowLayout()
+        
+        let divideFactor = biogramm.count % 5 == 0 ? biogramm.count / 5 : (biogramm.count / 5 + 1)
+        let width = passwordCollectionView.frame.width / 5
+        let height = passwordCollectionView.frame.width / CGFloat(divideFactor)
+        
+        flowLayout.itemSize = NSSize(width: width, height: height)
+        flowLayout.minimumInteritemSpacing = 0
+        flowLayout.minimumLineSpacing = 0
+        passwordCollectionView.collectionViewLayout = flowLayout
+
+        //view.wantsLayer = true
+    
+        //passwordCollectionView.layer?.backgroundColor = NSColor.black.cgColor
+    }
 }
+
+// MARK: - NSTextFieldDelegate
+
+extension SecondViewController: NSTextFieldDelegate {
+    func controlTextDidChange(_ obj: Notification) {
+        if obj.object as? NSTextField == filePathTextField {
+            fileName = filePathTextField.stringValue + fileExtension
+            configureFileURL()
+        }
+        if obj.object as? NSTextField == passwordTextField {
+            
+        }
+    }
+}
+
+// MARK: - NSCollectionViewDelegate
+
+extension SecondViewController: NSCollectionViewDataSource {
+    func collectionView(_ collectionView: NSCollectionView, numberOfItemsInSection section: Int) -> Int {
+        return biogramm.count
+    }
+    
+    func collectionView(_ collectionView: NSCollectionView, itemForRepresentedObjectAt indexPath: IndexPath) -> NSCollectionViewItem {
+        let item = collectionView.makeItem(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "BiogrammItem"), for: indexPath)
+        guard let collectionViewItem = item as? BiogrammItem else {return item}
+        
+        collectionViewItem.titleLabel.stringValue = biogramm[indexPath.item].uppercased()
+        return item
+    }
+}
+

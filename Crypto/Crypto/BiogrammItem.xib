@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14490.70"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="BiogrammItem" customModule="Crypto" customModuleProvider="target">
+            <connections>
+                <outlet property="titleLabel" destination="i07-Nr-EKj" id="Zar-Vy-Xbe"/>
+                <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
+            </connections>
+        </customObject>
+        <customObject id="VRe-45-vUf" customClass="BiogrammItem" customModule="Crypto" customModuleProvider="target"/>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView identifier="BiogrammItem" id="Hz6-mo-xeY">
+            <rect key="frame" x="0.0" y="0.0" width="40" height="41"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i07-Nr-EKj">
+                    <rect key="frame" x="8" y="8" width="24" height="25"/>
+                    <textFieldCell key="cell" lineBreakMode="clipping" borderStyle="border" alignment="center" title="1" id="R7w-pa-Us5">
+                        <font key="font" metaFont="system" size="17"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+            </subviews>
+            <constraints>
+                <constraint firstItem="i07-Nr-EKj" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="8" id="6TL-f6-48B"/>
+                <constraint firstItem="i07-Nr-EKj" firstAttribute="centerY" secondItem="Hz6-mo-xeY" secondAttribute="centerY" id="B12-N6-lDl"/>
+                <constraint firstItem="i07-Nr-EKj" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="R27-Hl-c6I"/>
+                <constraint firstAttribute="trailing" secondItem="i07-Nr-EKj" secondAttribute="trailing" constant="8" id="n7L-U4-NGt"/>
+                <constraint firstItem="i07-Nr-EKj" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="8" id="qhh-KO-Q2U"/>
+                <constraint firstAttribute="bottom" secondItem="i07-Nr-EKj" secondAttribute="bottom" constant="8" id="rSk-2l-u99"/>
+            </constraints>
+            <point key="canvasLocation" x="-58" y="267.5"/>
+        </customView>
+    </objects>
+</document>

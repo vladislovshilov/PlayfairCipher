@@ -12,6 +12,8 @@
 		51B5CD572208F7BC00AC5D5A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B5CD562208F7BC00AC5D5A /* ViewController.swift */; };
 		51B5CD592208F7BE00AC5D5A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 51B5CD582208F7BE00AC5D5A /* Assets.xcassets */; };
 		51B5CD5C2208F7BE00AC5D5A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 51B5CD5A2208F7BE00AC5D5A /* Main.storyboard */; };
+		51D6B3CC2291FDE6003F8F9E /* BiogrammItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51D6B3CA2291FDE6003F8F9E /* BiogrammItem.swift */; };
+		51D6B3CD2291FDE6003F8F9E /* BiogrammItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51D6B3CB2291FDE6003F8F9E /* BiogrammItem.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +25,8 @@
 		51B5CD5B2208F7BE00AC5D5A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		51B5CD5D2208F7BE00AC5D5A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		51B5CD5E2208F7BE00AC5D5A /* Crypto.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Crypto.entitlements; sourceTree = "<group>"; };
+		51D6B3CA2291FDE6003F8F9E /* BiogrammItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiogrammItem.swift; sourceTree = "<group>"; };
+		51D6B3CB2291FDE6003F8F9E /* BiogrammItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BiogrammItem.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +62,8 @@
 				51B5CD542208F7BC00AC5D5A /* AppDelegate.swift */,
 				51B5CD562208F7BC00AC5D5A /* ViewController.swift */,
 				5196DE8D220A11090062CA3C /* SecondViewController.swift */,
+				51D6B3CA2291FDE6003F8F9E /* BiogrammItem.swift */,
+				51D6B3CB2291FDE6003F8F9E /* BiogrammItem.xib */,
 				51B5CD582208F7BE00AC5D5A /* Assets.xcassets */,
 				51B5CD5A2208F7BE00AC5D5A /* Main.storyboard */,
 				51B5CD5D2208F7BE00AC5D5A /* Info.plist */,
@@ -98,6 +104,7 @@
 				TargetAttributes = {
 					51B5CD502208F7BC00AC5D5A = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1020;
 					};
 				};
 			};
@@ -125,6 +132,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				51B5CD592208F7BE00AC5D5A /* Assets.xcassets in Resources */,
+				51D6B3CD2291FDE6003F8F9E /* BiogrammItem.xib in Resources */,
 				51B5CD5C2208F7BE00AC5D5A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -138,6 +146,7 @@
 			files = (
 				5196DE8E220A11090062CA3C /* SecondViewController.swift in Sources */,
 				51B5CD572208F7BC00AC5D5A /* ViewController.swift in Sources */,
+				51D6B3CC2291FDE6003F8F9E /* BiogrammItem.swift in Sources */,
 				51B5CD552208F7BC00AC5D5A /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -284,7 +293,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "Vladislav-Shilov.Crypto";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -301,7 +310,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "Vladislav-Shilov.Crypto";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
