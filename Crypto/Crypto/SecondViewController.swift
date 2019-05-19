@@ -36,7 +36,7 @@ class SecondViewController: NSViewController {
     private let testDataToSave = "Test data"
     
     private var password = ""
-    private lazy var biogramm: [Character] = {
+    private lazy var matrix: [Character] = {
         let startChar = Unicode.Scalar("A").value
         let endChar = Unicode.Scalar("Z").value
 
@@ -115,7 +115,7 @@ class SecondViewController: NSViewController {
     
     @IBAction func setPasswordButtonDidPress(_ sender: Any) {
         password = passwordTextField.stringValue
-        generateBiogramm(with: password)
+        generateMatrix(with: password)
         
         configureCollectionView()
         passwordCollectionView.reloadData()
@@ -147,11 +147,11 @@ extension SecondViewController {
     }
     
     // MARK: Generate alphabet
-    private func generateBiogramm(with password: String) {
-        biogramm.removeAll()
+    private func generateMatrix(with password: String) {
+        matrix.removeAll()
         password.uppercased().forEach { ch in
-            if !biogramm.contains(ch) {
-                biogramm.append(ch)
+            if !matrix.contains(ch) {
+                matrix.append(ch)
             }
         }
         
@@ -160,17 +160,17 @@ extension SecondViewController {
         
         for alphabet in startChar...endChar {
             if let scalar = Unicode.Scalar(alphabet), !password.uppercased().contains(Character(scalar)), Character(scalar) != "Q" {
-                self.biogramm.append(Character(scalar))
+                self.matrix.append(Character(scalar))
             }
         }
-        print(biogramm)
+        print(matrix)
     }
     
     // MARK: - collectionview
     private func configureCollectionView() {
         let flowLayout = NSCollectionViewFlowLayout()
         
-        let divideFactor = biogramm.count % 5 == 0 ? biogramm.count / 5 : (biogramm.count / 5 + 1)
+        let divideFactor = matrix.count % 5 == 0 ? matrix.count / 5 : (matrix.count / 5 + 1)
         let width = passwordCollectionView.frame.width / 5
         let height = passwordCollectionView.frame.width / CGFloat(divideFactor)
         
@@ -203,14 +203,14 @@ extension SecondViewController: NSTextFieldDelegate {
 
 extension SecondViewController: NSCollectionViewDataSource {
     func collectionView(_ collectionView: NSCollectionView, numberOfItemsInSection section: Int) -> Int {
-        return biogramm.count
+        return matrix.count
     }
     
     func collectionView(_ collectionView: NSCollectionView, itemForRepresentedObjectAt indexPath: IndexPath) -> NSCollectionViewItem {
         let item = collectionView.makeItem(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "BiogrammItem"), for: indexPath)
         guard let collectionViewItem = item as? BiogrammItem else {return item}
         
-        collectionViewItem.titleLabel.stringValue = biogramm[indexPath.item].uppercased()
+        collectionViewItem.titleLabel.stringValue = matrix[indexPath.item].uppercased()
         return item
     }
 }
