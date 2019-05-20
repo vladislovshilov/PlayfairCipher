@@ -14,7 +14,13 @@ class EncryptViewController: NSViewController {
         super.viewDidLoad()
         
         let bigramAdapter = BigramAdapter()
-        bigramAdapter.wrapp(from: "IDIOCY OFTEN LOOKS LIKE INTELLIGENCE")
+        let bigram = bigramAdapter.wrapp(from: "Hello world")
+        let string = bigramAdapter.unwrapp(from: bigram)
+        
+        print("Wrapper result: \n")
+        print(bigram)
+        print(string)
+        print("-------------------")
     }
     
 }

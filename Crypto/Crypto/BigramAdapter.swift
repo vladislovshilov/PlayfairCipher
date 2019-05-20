@@ -25,7 +25,15 @@ final class BigramAdapter: Adapter {
     }
     
     func unwrapp(from value: Bigram) -> String {
-        return ""
+        var string = ""
+        value.forEach { bigram in
+            bigram.forEach({ ch in
+                if ch != "X" {
+                    string.append(ch)
+                }
+            })
+        }
+        return string
     }
     
     // MARK: - Support methods
@@ -73,9 +81,6 @@ final class BigramAdapter: Adapter {
                 bigramIndex += 1
                 elementIndex = 0
             }
-            
-//            bigramIndex += elementIndex == 1 ? 1 : 0
-//            elementIndex = elementIndex == 1 ? 0 : 1
         }
         
         return bigram
