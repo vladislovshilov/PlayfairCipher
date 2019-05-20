@@ -17,16 +17,21 @@ protocol IMatrixService {
 }
 
 final class MatrixService: IMatrixService {
+    
+    // MARK: - Properties
+    // MARK: IMatrixService
     var password = ""
     
+    // MARK: Local propertis
     private let randomWords = ["random", "password", "oleg", "word"]
-    
     private var matrix = [Character] ()
     
+    // MARK: - Initialization
     init() {
         generateMatrix(with: password)
     }
     
+    // MARK: - Interface
     func generateMatrix() {
         generateMatrix(with: password)
     }
@@ -45,7 +50,6 @@ final class MatrixService: IMatrixService {
 }
 
 // MARK: - Support methods
-
 extension MatrixService {
     private func generateMatrix(with password: String) {
         matrix.removeAll()

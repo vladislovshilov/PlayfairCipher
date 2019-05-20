@@ -708,11 +708,11 @@
             </objects>
             <point key="canvasLocation" x="606.5" y="724"/>
         </scene>
-        <!--View Controller-->
+        <!--Encrypt View Controller-->
         <scene sceneID="gd6-N5-otk">
             <objects>
                 <customObject id="f6h-XY-VDN" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <viewController id="1pU-zx-s79" customClass="ViewController" customModule="Crypto" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EncryptViewController" id="1pU-zx-s79" customClass="EncryptViewController" customModule="Crypto" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="XN5-vx-N6E">
                         <rect key="frame" x="0.0" y="0.0" width="589" height="378"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -892,7 +892,7 @@
         <scene sceneID="GTn-CS-QqD">
             <objects>
                 <customObject id="umw-IN-ns7" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <viewController title="Decrypt" id="7GE-LZ-fNq" customClass="ViewController" customModule="Crypto" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Decrypt" storyboardIdentifier="DecryptViewController" id="7GE-LZ-fNq" customClass="DecryptViewController" customModule="Crypto" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="5L6-Hc-XCL">
                         <rect key="frame" x="0.0" y="0.0" width="589" height="363"/>
                         <autoresizingMask key="autoresizingMask"/>

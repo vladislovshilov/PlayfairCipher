@@ -9,9 +9,14 @@
 /* Begin PBXBuildFile section */
 		511E658222935052003E221E /* FileManagerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511E658122935052003E221E /* FileManagerService.swift */; };
 		511E65862293574F003E221E /* MatrixService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511E65852293574F003E221E /* MatrixService.swift */; };
+		511E658A2293593D003E221E /* PlayfairDecrypter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511E65892293593D003E221E /* PlayfairDecrypter.swift */; };
+		511E658C22935944003E221E /* PlayfairEncrypter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511E658B22935944003E221E /* PlayfairEncrypter.swift */; };
+		511E658E229359DD003E221E /* EncryptViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511E658D229359DD003E221E /* EncryptViewController.swift */; };
+		511E6590229359EA003E221E /* DecryptViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511E658F229359EA003E221E /* DecryptViewController.swift */; };
+		511E659322935A3E003E221E /* BigramAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511E659222935A3E003E221E /* BigramAdapter.swift */; };
+		511E659622935CB4003E221E /* Bigram.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511E659522935CB4003E221E /* Bigram.swift */; };
 		5196DE8E220A11090062CA3C /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5196DE8D220A11090062CA3C /* SecondViewController.swift */; };
 		51B5CD552208F7BC00AC5D5A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B5CD542208F7BC00AC5D5A /* AppDelegate.swift */; };
-		51B5CD572208F7BC00AC5D5A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B5CD562208F7BC00AC5D5A /* ViewController.swift */; };
 		51B5CD592208F7BE00AC5D5A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 51B5CD582208F7BE00AC5D5A /* Assets.xcassets */; };
 		51B5CD5C2208F7BE00AC5D5A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 51B5CD5A2208F7BE00AC5D5A /* Main.storyboard */; };
 		51D6B3CC2291FDE6003F8F9E /* MartixItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51D6B3CA2291FDE6003F8F9E /* MartixItem.swift */; };
@@ -21,10 +26,15 @@
 /* Begin PBXFileReference section */
 		511E658122935052003E221E /* FileManagerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerService.swift; sourceTree = "<group>"; };
 		511E65852293574F003E221E /* MatrixService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatrixService.swift; sourceTree = "<group>"; };
+		511E65892293593D003E221E /* PlayfairDecrypter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayfairDecrypter.swift; sourceTree = "<group>"; };
+		511E658B22935944003E221E /* PlayfairEncrypter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayfairEncrypter.swift; sourceTree = "<group>"; };
+		511E658D229359DD003E221E /* EncryptViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptViewController.swift; sourceTree = "<group>"; };
+		511E658F229359EA003E221E /* DecryptViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecryptViewController.swift; sourceTree = "<group>"; };
+		511E659222935A3E003E221E /* BigramAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigramAdapter.swift; sourceTree = "<group>"; };
+		511E659522935CB4003E221E /* Bigram.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bigram.swift; sourceTree = "<group>"; };
 		5196DE8D220A11090062CA3C /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		51B5CD512208F7BC00AC5D5A /* Crypto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Crypto.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		51B5CD542208F7BC00AC5D5A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		51B5CD562208F7BC00AC5D5A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		51B5CD582208F7BE00AC5D5A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		51B5CD5B2208F7BE00AC5D5A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		51B5CD5D2208F7BE00AC5D5A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -66,7 +76,8 @@
 		511E657F22935021003E221E /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				51B5CD562208F7BC00AC5D5A /* ViewController.swift */,
+				511E658D229359DD003E221E /* EncryptViewController.swift */,
+				511E658F229359EA003E221E /* DecryptViewController.swift */,
 				5196DE8D220A11090062CA3C /* SecondViewController.swift */,
 				51B5CD5A2208F7BE00AC5D5A /* Main.storyboard */,
 			);
@@ -76,6 +87,8 @@
 		511E65802293502A003E221E /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				511E659122935A2B003E221E /* BigramAdapter */,
+				511E65872293591A003E221E /* Cypher */,
 				511E65842293573C003E221E /* MatrixService */,
 				511E658322935721003E221E /* FileManagerService */,
 			);
@@ -98,6 +111,31 @@
 			name = MatrixService;
 			sourceTree = "<group>";
 		};
+		511E65872293591A003E221E /* Cypher */ = {
+			isa = PBXGroup;
+			children = (
+				511E658B22935944003E221E /* PlayfairEncrypter.swift */,
+				511E65892293593D003E221E /* PlayfairDecrypter.swift */,
+			);
+			name = Cypher;
+			sourceTree = "<group>";
+		};
+		511E659122935A2B003E221E /* BigramAdapter */ = {
+			isa = PBXGroup;
+			children = (
+				511E659222935A3E003E221E /* BigramAdapter.swift */,
+			);
+			name = BigramAdapter;
+			sourceTree = "<group>";
+		};
+		511E659422935CAE003E221E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				511E659522935CB4003E221E /* Bigram.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		51B5CD482208F7BC00AC5D5A = {
 			isa = PBXGroup;
 			children = (
@@ -118,6 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				51B5CD542208F7BC00AC5D5A /* AppDelegate.swift */,
+				511E659422935CAE003E221E /* Model */,
 				511E65802293502A003E221E /* Core */,
 				511E657F22935021003E221E /* UI */,
 				511E657E22935014003E221E /* Views */,
@@ -200,10 +239,15 @@
 			files = (
 				511E65862293574F003E221E /* MatrixService.swift in Sources */,
 				511E658222935052003E221E /* FileManagerService.swift in Sources */,
+				511E6590229359EA003E221E /* DecryptViewController.swift in Sources */,
 				5196DE8E220A11090062CA3C /* SecondViewController.swift in Sources */,
-				51B5CD572208F7BC00AC5D5A /* ViewController.swift in Sources */,
 				51D6B3CC2291FDE6003F8F9E /* MartixItem.swift in Sources */,
 				51B5CD552208F7BC00AC5D5A /* AppDelegate.swift in Sources */,
+				511E659622935CB4003E221E /* Bigram.swift in Sources */,
+				511E658E229359DD003E221E /* EncryptViewController.swift in Sources */,
+				511E658C22935944003E221E /* PlayfairEncrypter.swift in Sources */,
+				511E658A2293593D003E221E /* PlayfairDecrypter.swift in Sources */,
+				511E659322935A3E003E221E /* BigramAdapter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
