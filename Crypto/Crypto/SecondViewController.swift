@@ -10,6 +10,7 @@ import Cocoa
 
 class SecondViewController: NSViewController {
     
+    // MARK: - IBOutlet's
     @IBOutlet private weak var openFileButton: NSButton!
     @IBOutlet private weak var saveFileButton: NSButton!
     @IBOutlet private weak var cancelButton: NSButton!
@@ -21,19 +22,10 @@ class SecondViewController: NSViewController {
     @IBOutlet private weak var setPasswordButton: NSButton!
     @IBOutlet private weak var generatePasswordButton: NSButton!
     
+    // MARK: - Properties
+    private var fileManager: IFileManagerService = FileManagerService()
     
-    private let fileManager = FileManager.default
-    private let fileExtension = ".txt"
-    private var fileName = ""
-    private var directoryURL: URL? {
-        didSet {
-            saveFileButton.isHidden = directoryURL == nil
-            cancelButton.isHidden = directoryURL == nil
-        }
-    }
-    private var fileURL: URL?
-    
-    private let testDataToSave = "Test data"
+    private let randomWords = ["random", "password", "oleg", "word"]
     
     private var password = ""
     private lazy var matrix: [Character] = {
@@ -53,11 +45,9 @@ class SecondViewController: NSViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        let paths = fileManager.urls(for: .documentDirectory, in: .userDomainMask)
-//        directoryURL = paths.first!
-        directoryURL = nil
         
-        pathControl.url = directoryURL
+        fileManager.delegate = self
+        pathControl.url = nil
         filePathTextField.delegate = self
         passwordTextField.delegate = self
     }
@@ -77,37 +67,19 @@ class SecondViewController: NSViewController {
         dialog.allowsMultipleSelection = false;
         dialog.allowedFileTypes        = ["txt"];
         
-        if dialog.runModal() == .OK {
-            directoryURL = dialog.directoryURL
-            fileURL = dialog.url
-            
-            if let directoryURL = directoryURL, let fileURL = fileURL {
-                fileName = String(fileURL.absoluteString.dropFirst(directoryURL.absoluteString.count))
-                configureFileURL()
-            }
+        if dialog.runModal() == .OK, let fileUrl = dialog.url, let directoryUrl = dialog.directoryURL {
+            fileManager.setURLs(fileURL: fileUrl, directoryURL: directoryUrl)
         } else {
             return
         }
     }
     
     @IBAction func saveFileButtonDidPress(_ sender: Any) {
-        if let fileURL = fileURL, let data = testDataToSave.data(using: .utf8) {
-            do {
-                if fileManager.fileExists(atPath: fileURL.path) {
-                    try saveData(data, at: fileURL)
-                }
-                else {
-                    fileManager.createFile(atPath: fileURL.path, contents: nil, attributes: nil)
-                    try saveData(data, at: fileURL)
-                }
-            } catch let error {
-                print(error.localizedDescription)
-            }
-        }
+        fileManager.save(string: "test save string")
     }
     
     @IBAction func cancelButtonDidPress(_ sender: Any) {
-        directoryURL = nil
+        fileManager.directoryURL = nil
         pathControl.url = nil
         filePathTextField.stringValue = ""
         filePathTextField.resignFirstResponder()
@@ -115,42 +87,27 @@ class SecondViewController: NSViewController {
     
     @IBAction func setPasswordButtonDidPress(_ sender: Any) {
         password = passwordTextField.stringValue
-        generateMatrix(with: password)
         
-        configureCollectionView()
-        passwordCollectionView.reloadData()
+        updateCollectionView()
     }
     
     @IBAction func generatePasswordButtonDidPress(_ sender: Any) {
+        let random = UInt32(randomWords.count - 1)
+        let index = Int(arc4random_uniform(random))
+        password = randomWords[index]
         
+        updateCollectionView()
     }
 }
 
 // MARK: - Private methods
 
 extension SecondViewController {
-    private func configureFileURL() {
-        guard let directoryURL = directoryURL else { return }
-        
-        if fileName != ".txt" {
-            fileURL = directoryURL.appendingPathComponent(fileName)
-            pathControl.url = fileURL
-            filePathTextField.stringValue = String(fileName.dropLast(fileExtension.count))
-        }
-        else {
-            pathControl.url = directoryURL
-        }
-    }
-    
-    private func saveData(_ data: Data, at url: URL) throws {
-        try data.write(to: url)
-    }
-    
     // MARK: Generate alphabet
     private func generateMatrix(with password: String) {
         matrix.removeAll()
         password.uppercased().forEach { ch in
-            if !matrix.contains(ch) {
+            if !matrix.contains(ch), ch != "Q" {
                 matrix.append(ch)
             }
         }
@@ -178,10 +135,13 @@ extension SecondViewController {
         flowLayout.minimumInteritemSpacing = 0
         flowLayout.minimumLineSpacing = 0
         passwordCollectionView.collectionViewLayout = flowLayout
-
-        //view.wantsLayer = true
+    }
     
-        //passwordCollectionView.layer?.backgroundColor = NSColor.black.cgColor
+    private func updateCollectionView() {
+        generateMatrix(with: password)
+        configureCollectionView()
+        passwordCollectionView.reloadData()
+        passwordCollectionView.layout()
     }
 }
 
@@ -190,8 +150,7 @@ extension SecondViewController {
 extension SecondViewController: NSTextFieldDelegate {
     func controlTextDidChange(_ obj: Notification) {
         if obj.object as? NSTextField == filePathTextField {
-            fileName = filePathTextField.stringValue + fileExtension
-            configureFileURL()
+            fileManager.setFileName(filePathTextField.stringValue)
         }
         if obj.object as? NSTextField == passwordTextField {
             
@@ -207,11 +166,22 @@ extension SecondViewController: NSCollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: NSCollectionView, itemForRepresentedObjectAt indexPath: IndexPath) -> NSCollectionViewItem {
-        let item = collectionView.makeItem(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "BiogrammItem"), for: indexPath)
-        guard let collectionViewItem = item as? BiogrammItem else {return item}
+        let item = collectionView.makeItem(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "MartixItem"), for: indexPath)
+        guard let collectionViewItem = item as? MartixItem else {return item}
         
         collectionViewItem.titleLabel.stringValue = matrix[indexPath.item].uppercased()
         return item
     }
 }
 
+// MARK: - FileManagerServiceDelegate {
+
+extension SecondViewController: FileManagerServiceDelegate {
+    func fileURLDidChange(_ fileURL: URL) {
+        pathControl.url = fileURL
+    }
+    
+    func fileNameDidChange(_ fileName: String) {
+        filePathTextField.stringValue = fileName
+    }
+}

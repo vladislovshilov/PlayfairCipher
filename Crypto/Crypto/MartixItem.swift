@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class BiogrammItem: NSCollectionViewItem {
+class MartixItem: NSCollectionViewItem {
 
     @IBOutlet weak var titleLabel: NSTextField!
     

@@ -7,16 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		511E658222935052003E221E /* FileManagerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511E658122935052003E221E /* FileManagerService.swift */; };
 		5196DE8E220A11090062CA3C /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5196DE8D220A11090062CA3C /* SecondViewController.swift */; };
 		51B5CD552208F7BC00AC5D5A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B5CD542208F7BC00AC5D5A /* AppDelegate.swift */; };
 		51B5CD572208F7BC00AC5D5A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B5CD562208F7BC00AC5D5A /* ViewController.swift */; };
 		51B5CD592208F7BE00AC5D5A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 51B5CD582208F7BE00AC5D5A /* Assets.xcassets */; };
 		51B5CD5C2208F7BE00AC5D5A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 51B5CD5A2208F7BE00AC5D5A /* Main.storyboard */; };
-		51D6B3CC2291FDE6003F8F9E /* BiogrammItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51D6B3CA2291FDE6003F8F9E /* BiogrammItem.swift */; };
-		51D6B3CD2291FDE6003F8F9E /* BiogrammItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51D6B3CB2291FDE6003F8F9E /* BiogrammItem.xib */; };
+		51D6B3CC2291FDE6003F8F9E /* MartixItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51D6B3CA2291FDE6003F8F9E /* MartixItem.swift */; };
+		51D6B3CD2291FDE6003F8F9E /* MartixItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51D6B3CB2291FDE6003F8F9E /* MartixItem.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		511E658122935052003E221E /* FileManagerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerService.swift; sourceTree = "<group>"; };
 		5196DE8D220A11090062CA3C /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		51B5CD512208F7BC00AC5D5A /* Crypto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Crypto.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		51B5CD542208F7BC00AC5D5A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -25,8 +27,8 @@
 		51B5CD5B2208F7BE00AC5D5A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		51B5CD5D2208F7BE00AC5D5A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		51B5CD5E2208F7BE00AC5D5A /* Crypto.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Crypto.entitlements; sourceTree = "<group>"; };
-		51D6B3CA2291FDE6003F8F9E /* BiogrammItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiogrammItem.swift; sourceTree = "<group>"; };
-		51D6B3CB2291FDE6003F8F9E /* BiogrammItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BiogrammItem.xib; sourceTree = "<group>"; };
+		51D6B3CA2291FDE6003F8F9E /* MartixItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MartixItem.swift; sourceTree = "<group>"; };
+		51D6B3CB2291FDE6003F8F9E /* MartixItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MartixItem.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +42,51 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		511E657D2293500A003E221E /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				51B5CD582208F7BE00AC5D5A /* Assets.xcassets */,
+				51B5CD5D2208F7BE00AC5D5A /* Info.plist */,
+				51B5CD5E2208F7BE00AC5D5A /* Crypto.entitlements */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		511E657E22935014003E221E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				51D6B3CA2291FDE6003F8F9E /* MartixItem.swift */,
+				51D6B3CB2291FDE6003F8F9E /* MartixItem.xib */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		511E657F22935021003E221E /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				51B5CD562208F7BC00AC5D5A /* ViewController.swift */,
+				5196DE8D220A11090062CA3C /* SecondViewController.swift */,
+				51B5CD5A2208F7BE00AC5D5A /* Main.storyboard */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
+		511E65802293502A003E221E /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				511E658322935721003E221E /* FileManager */,
+			);
+			name = Core;
+			sourceTree = "<group>";
+		};
+		511E658322935721003E221E /* FileManager */ = {
+			isa = PBXGroup;
+			children = (
+				511E658122935052003E221E /* FileManagerService.swift */,
+			);
+			name = FileManager;
+			sourceTree = "<group>";
+		};
 		51B5CD482208F7BC00AC5D5A = {
 			isa = PBXGroup;
 			children = (
@@ -60,14 +107,10 @@
 			isa = PBXGroup;
 			children = (
 				51B5CD542208F7BC00AC5D5A /* AppDelegate.swift */,
-				51B5CD562208F7BC00AC5D5A /* ViewController.swift */,
-				5196DE8D220A11090062CA3C /* SecondViewController.swift */,
-				51D6B3CA2291FDE6003F8F9E /* BiogrammItem.swift */,
-				51D6B3CB2291FDE6003F8F9E /* BiogrammItem.xib */,
-				51B5CD582208F7BE00AC5D5A /* Assets.xcassets */,
-				51B5CD5A2208F7BE00AC5D5A /* Main.storyboard */,
-				51B5CD5D2208F7BE00AC5D5A /* Info.plist */,
-				51B5CD5E2208F7BE00AC5D5A /* Crypto.entitlements */,
+				511E65802293502A003E221E /* Core */,
+				511E657F22935021003E221E /* UI */,
+				511E657E22935014003E221E /* Views */,
+				511E657D2293500A003E221E /* Resources */,
 			);
 			path = Crypto;
 			sourceTree = "<group>";
@@ -132,7 +175,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				51B5CD592208F7BE00AC5D5A /* Assets.xcassets in Resources */,
-				51D6B3CD2291FDE6003F8F9E /* BiogrammItem.xib in Resources */,
+				51D6B3CD2291FDE6003F8F9E /* MartixItem.xib in Resources */,
 				51B5CD5C2208F7BE00AC5D5A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -144,9 +187,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				511E658222935052003E221E /* FileManagerService.swift in Sources */,
 				5196DE8E220A11090062CA3C /* SecondViewController.swift in Sources */,
 				51B5CD572208F7BC00AC5D5A /* ViewController.swift in Sources */,
-				51D6B3CC2291FDE6003F8F9E /* BiogrammItem.swift in Sources */,
+				51D6B3CC2291FDE6003F8F9E /* MartixItem.swift in Sources */,
 				51B5CD552208F7BC00AC5D5A /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
