@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		511E658222935052003E221E /* FileManagerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511E658122935052003E221E /* FileManagerService.swift */; };
+		511E65862293574F003E221E /* MatrixService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511E65852293574F003E221E /* MatrixService.swift */; };
 		5196DE8E220A11090062CA3C /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5196DE8D220A11090062CA3C /* SecondViewController.swift */; };
 		51B5CD552208F7BC00AC5D5A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B5CD542208F7BC00AC5D5A /* AppDelegate.swift */; };
 		51B5CD572208F7BC00AC5D5A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51B5CD562208F7BC00AC5D5A /* ViewController.swift */; };
@@ -19,6 +20,7 @@
 
 /* Begin PBXFileReference section */
 		511E658122935052003E221E /* FileManagerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerService.swift; sourceTree = "<group>"; };
+		511E65852293574F003E221E /* MatrixService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatrixService.swift; sourceTree = "<group>"; };
 		5196DE8D220A11090062CA3C /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		51B5CD512208F7BC00AC5D5A /* Crypto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Crypto.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		51B5CD542208F7BC00AC5D5A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -74,17 +76,26 @@
 		511E65802293502A003E221E /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				511E658322935721003E221E /* FileManager */,
+				511E65842293573C003E221E /* MatrixService */,
+				511E658322935721003E221E /* FileManagerService */,
 			);
 			name = Core;
 			sourceTree = "<group>";
 		};
-		511E658322935721003E221E /* FileManager */ = {
+		511E658322935721003E221E /* FileManagerService */ = {
 			isa = PBXGroup;
 			children = (
 				511E658122935052003E221E /* FileManagerService.swift */,
 			);
-			name = FileManager;
+			name = FileManagerService;
+			sourceTree = "<group>";
+		};
+		511E65842293573C003E221E /* MatrixService */ = {
+			isa = PBXGroup;
+			children = (
+				511E65852293574F003E221E /* MatrixService.swift */,
+			);
+			name = MatrixService;
 			sourceTree = "<group>";
 		};
 		51B5CD482208F7BC00AC5D5A = {
@@ -187,6 +198,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				511E65862293574F003E221E /* MatrixService.swift in Sources */,
 				511E658222935052003E221E /* FileManagerService.swift in Sources */,
 				5196DE8E220A11090062CA3C /* SecondViewController.swift in Sources */,
 				51B5CD572208F7BC00AC5D5A /* ViewController.swift in Sources */,

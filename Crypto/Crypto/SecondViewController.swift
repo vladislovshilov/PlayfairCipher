@@ -24,24 +24,7 @@ class SecondViewController: NSViewController {
     
     // MARK: - Properties
     private var fileManager: IFileManagerService = FileManagerService()
-    
-    private let randomWords = ["random", "password", "oleg", "word"]
-    
-    private var password = ""
-    private lazy var matrix: [Character] = {
-        let startChar = Unicode.Scalar("A").value
-        let endChar = Unicode.Scalar("Z").value
-
-        var newAlpahbet = [Character]()
-        for alphabet in startChar...endChar {
-            if let scalar = Unicode.Scalar(alphabet), Character(scalar) != "Q" {
-                newAlpahbet.append(Character(scalar))
-            }
-        }
-        print(newAlpahbet)
-
-        return newAlpahbet
-    }()
+    private var matrixService: IMatrixService = MatrixService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -86,16 +69,12 @@ class SecondViewController: NSViewController {
     }
     
     @IBAction func setPasswordButtonDidPress(_ sender: Any) {
-        password = passwordTextField.stringValue
-        
+        matrixService.password = passwordTextField.stringValue
         updateCollectionView()
     }
     
     @IBAction func generatePasswordButtonDidPress(_ sender: Any) {
-        let random = UInt32(randomWords.count - 1)
-        let index = Int(arc4random_uniform(random))
-        password = randomWords[index]
-        
+        passwordTextField.stringValue = matrixService.generatePassword()
         updateCollectionView()
     }
 }
@@ -103,30 +82,11 @@ class SecondViewController: NSViewController {
 // MARK: - Private methods
 
 extension SecondViewController {
-    // MARK: Generate alphabet
-    private func generateMatrix(with password: String) {
-        matrix.removeAll()
-        password.uppercased().forEach { ch in
-            if !matrix.contains(ch), ch != "Q" {
-                matrix.append(ch)
-            }
-        }
-        
-        let startChar = Unicode.Scalar("A").value
-        let endChar = Unicode.Scalar("Z").value
-        
-        for alphabet in startChar...endChar {
-            if let scalar = Unicode.Scalar(alphabet), !password.uppercased().contains(Character(scalar)), Character(scalar) != "Q" {
-                self.matrix.append(Character(scalar))
-            }
-        }
-        print(matrix)
-    }
-    
-    // MARK: - collectionview
+    // MARK: collectionview
     private func configureCollectionView() {
         let flowLayout = NSCollectionViewFlowLayout()
-        
+    
+        let matrix = matrixService.getMatrix()
         let divideFactor = matrix.count % 5 == 0 ? matrix.count / 5 : (matrix.count / 5 + 1)
         let width = passwordCollectionView.frame.width / 5
         let height = passwordCollectionView.frame.width / CGFloat(divideFactor)
@@ -138,7 +98,7 @@ extension SecondViewController {
     }
     
     private func updateCollectionView() {
-        generateMatrix(with: password)
+        matrixService.generateMatrix()
         configureCollectionView()
         passwordCollectionView.reloadData()
         passwordCollectionView.layout()
@@ -162,14 +122,14 @@ extension SecondViewController: NSTextFieldDelegate {
 
 extension SecondViewController: NSCollectionViewDataSource {
     func collectionView(_ collectionView: NSCollectionView, numberOfItemsInSection section: Int) -> Int {
-        return matrix.count
+        return matrixService.getMatrix().count
     }
     
     func collectionView(_ collectionView: NSCollectionView, itemForRepresentedObjectAt indexPath: IndexPath) -> NSCollectionViewItem {
         let item = collectionView.makeItem(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "MartixItem"), for: indexPath)
         guard let collectionViewItem = item as? MartixItem else {return item}
         
-        collectionViewItem.titleLabel.stringValue = matrix[indexPath.item].uppercased()
+        collectionViewItem.titleLabel.stringValue = matrixService.getMatrix()[indexPath.item].uppercased()
         return item
     }
 }
