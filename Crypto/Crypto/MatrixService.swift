@@ -14,6 +14,8 @@ protocol IMatrixService {
     func generateMatrix()
     func getMatrix() -> [Character]
     func generatePassword() -> String
+    
+    func printMatrix()
 }
 
 final class MatrixService: IMatrixService {
@@ -47,6 +49,29 @@ final class MatrixService: IMatrixService {
         
         return password
     }
+    
+    func printMatrix() {
+        var index = 0
+        var rowString = ""
+        
+        print("---------")
+        print("Matrix: ")
+        matrix.forEach { ch in
+            if index == 0 {
+                rowString.append(" | ")
+            }
+            rowString.append(ch)
+            rowString.append(" | ")
+            
+            index += 1
+            if index == 5 {
+                index = 0
+                print(rowString)
+                rowString = ""
+            }
+        }
+        print("---------")
+    }
 }
 
 // MARK: - Support methods
@@ -67,6 +92,6 @@ extension MatrixService {
                 self.matrix.append(Character(scalar))
             }
         }
-        print(matrix)
+        printMatrix()
     }
 }
