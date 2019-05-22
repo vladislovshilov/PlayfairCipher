@@ -14,7 +14,8 @@ protocol Decrypter {
 
 final class PlayfairDecrypter: PlayfairEnigma, Decrypter {
     func decrypt(_ bigram: Bigram, with matrix: [Character]) -> String {
-        var decryptedString = ""
+        let adapter = BigramAdapter()
+        var decryptedBigram = Bigram()
         
         var index = 0
         bigram.forEach { bigramItem in
@@ -27,14 +28,12 @@ final class PlayfairDecrypter: PlayfairEnigma, Decrypter {
             print(secondItemIndex)
             print("----------")
             
-            let encryptedBigramItem = perform(.decryption, of: bigramItem, with: matrix, firstIndex: firstItemIndex, secondIndex: secondItemIndex)
-            encryptedBigramItem.forEach({ (ch) in
-                decryptedString.append(ch)
-            })
+            let decryptedBigramItem = perform(.decryption, of: bigramItem, with: matrix, firstIndex: firstItemIndex, secondIndex: secondItemIndex)
+            decryptedBigram.append(decryptedBigramItem)
             
             index += 1
         }
         
-        return decryptedString
+        return adapter.unwrapp(from: decryptedBigram)
     }
 }

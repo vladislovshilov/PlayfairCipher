@@ -20,11 +20,11 @@ final class BigramAdapter: Adapter {
     typealias FromValue = String
     typealias ToValue = Bigram
     
-    func wrapp(from value: String) -> Bigram {
+    func wrapp(from value: FromValue) -> ToValue {
         return createBigram(from: getInitialCharacterSet(from: value))
     }
     
-    func unwrapp(from value: Bigram) -> String {
+    func unwrapp(from value: ToValue) -> FromValue {
         var string = ""
         value.forEach { bigram in
             bigram.forEach({ ch in

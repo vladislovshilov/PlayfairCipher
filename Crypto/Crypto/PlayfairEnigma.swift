@@ -8,8 +8,33 @@
 
 import Foundation
 
+enum PlayfairRule {
+    case row, section, cross
+}
+
+enum PlayfairType {
+    case encryption, decryption
+    
+    var rowAddition: Int {
+        switch self {
+        case .encryption:
+            return 1
+        case .decryption:
+            return -1
+        }
+    }
+    
+    var rowMaximum: Int {
+        switch self {
+        case .encryption:
+            return 4
+        case .decryption:
+            return 0
+        }
+    }
+}
+
 class PlayfairEnigma {
-    // MARK: - Support methods
     func findFirstElementIndex(in matrix: [Character], from bigramItem: [Character]) -> IndexPath {
         var indexPath = IndexPath(item: 0, section: 0)
         var shouldStop = false

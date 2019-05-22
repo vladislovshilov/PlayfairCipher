@@ -8,34 +8,8 @@
 
 import Foundation
 
-enum PlayfairRule {
-    case row, section, cross
-}
-
-enum PlayfairType {
-    case encryption, decryption
-    
-    var rowAddition: Int {
-        switch self {
-        case .encryption:
-            return 1
-        case .decryption:
-            return -1
-        }
-    }
-    
-    var rowMaximum: Int {
-        switch self {
-        case .encryption:
-            return 4
-        case .decryption:
-            return 0
-        }
-    }
-}
-
 protocol Encrypter {
-    func encrypt(_ bigram: Bigram, with matrix: [Character]) -> Bigram
+    func encrypt(_ word: String, with matrix: [Character]) -> Bigram
 }
 
 /// Playfair cypher rules
@@ -49,7 +23,8 @@ protocol Encrypter {
 ///  OR becomes YZ  OR  -> BY       OR  -> ZX       OR  -> YZ
 
 final class PlayfairEncypter: PlayfairEnigma, Encrypter {
-    func encrypt(_ bigram: Bigram, with matrix: [Character]) -> Bigram {
+    func encrypt(_ word: String, with matrix: [Character]) -> Bigram {
+        let bigram = BigramAdapter().wrapp(from: word)
         var encryptedBigram = Bigram()
         
         var index = 0

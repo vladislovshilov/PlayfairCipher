@@ -27,7 +27,7 @@ class EncryptViewController: NSViewController {
         let matrix = matrixService.getMatrix()
         
         let encrypter = PlayfairEncypter()
-        let encryptedString = encrypter.encrypt(bigram, with: matrix)
+        let encryptedString = encrypter.encrypt("Hello world", with: matrix)
         
         print("Encrypter result:")
         print(encryptedString)

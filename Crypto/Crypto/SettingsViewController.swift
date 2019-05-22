@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class SecondViewController: NSViewController {
+class SettingsViewController: NSViewController {
     
     // MARK: - IBOutlet's
     @IBOutlet private weak var openFileButton: NSButton!
@@ -22,9 +22,24 @@ class SecondViewController: NSViewController {
     @IBOutlet private weak var setPasswordButton: NSButton!
     @IBOutlet private weak var generatePasswordButton: NSButton!
     
+    @IBOutlet private weak var inputMessageTextField: NSTextField!
+    @IBOutlet private weak var encryptButton: NSButton!
+    
+    @IBOutlet private weak var encryptedWordLabel: NSTextField!
+    
+    @IBOutlet private weak var decryptButton: NSButton!
+    @IBOutlet private weak var decryptedWordLabel: NSTextField!
+    
     // MARK: - Properties
     private var fileManager: IFileManagerService = FileManagerService()
     private var matrixService: IMatrixService = MatrixService()
+    private let encrypter: Encrypter = PlayfairEncypter()
+    private let decrypter: Decrypter = PlayfairDecrypter()
+    
+    private let bigramAdapter = BigramAdapter()
+    
+    private var encryptedWord = Bigram()
+    private var decryptedWord = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,7 +55,7 @@ class SecondViewController: NSViewController {
         configureCollectionView()
     }
     
-    @IBAction func openFileButtonDidPress(_ sender: Any) {
+    @IBAction private func openFileButtonDidPress(_ sender: Any) {
         let dialog = NSOpenPanel();
         
         dialog.showsResizeIndicator    = true;
@@ -57,31 +72,45 @@ class SecondViewController: NSViewController {
         }
     }
     
-    @IBAction func saveFileButtonDidPress(_ sender: Any) {
+    @IBAction private func saveFileButtonDidPress(_ sender: Any) {
         fileManager.save(string: "test save string")
     }
     
-    @IBAction func cancelButtonDidPress(_ sender: Any) {
+    @IBAction private func cancelButtonDidPress(_ sender: Any) {
         fileManager.directoryURL = nil
         pathControl.url = nil
         filePathTextField.stringValue = ""
         filePathTextField.resignFirstResponder()
     }
     
-    @IBAction func setPasswordButtonDidPress(_ sender: Any) {
+    @IBAction private func setPasswordButtonDidPress(_ sender: Any) {
         matrixService.password = passwordTextField.stringValue
         updateCollectionView()
+        clearFields()
     }
     
-    @IBAction func generatePasswordButtonDidPress(_ sender: Any) {
+    @IBAction private func generatePasswordButtonDidPress(_ sender: Any) {
         passwordTextField.stringValue = matrixService.generatePassword()
         updateCollectionView()
+        clearFields()
+    }
+    
+    @IBAction private func enctyptButtonDidPress(_ sender: Any) {
+        encryptedWord = encrypter.encrypt(inputMessageTextField.stringValue, with: matrixService.getMatrix())
+        
+        encryptedWordLabel.stringValue = bigramAdapter.unwrapp(from: encryptedWord)
+    }
+    
+    @IBAction private func decryptButtonDidPress(_ sender: Any) {
+        decryptedWord = decrypter.decrypt(encryptedWord, with: matrixService.getMatrix())
+        
+        decryptedWordLabel.stringValue = decryptedWord
     }
 }
 
 // MARK: - Private methods
 
-extension SecondViewController {
+extension SettingsViewController {
     // MARK: collectionview
     private func configureCollectionView() {
         let flowLayout = NSCollectionViewFlowLayout()
@@ -103,11 +132,20 @@ extension SecondViewController {
         passwordCollectionView.reloadData()
         passwordCollectionView.layout()
     }
+    
+    // MARK: - Logic
+    private func clearFields() {
+        encryptedWord = Bigram()
+        decryptedWord = ""
+        
+        inputMessageTextField.stringValue = ""
+        decryptedWordLabel.stringValue = ""
+    }
 }
 
 // MARK: - NSTextFieldDelegate
 
-extension SecondViewController: NSTextFieldDelegate {
+extension SettingsViewController: NSTextFieldDelegate {
     func controlTextDidChange(_ obj: Notification) {
         if obj.object as? NSTextField == filePathTextField {
             fileManager.setFileName(filePathTextField.stringValue)
@@ -120,7 +158,7 @@ extension SecondViewController: NSTextFieldDelegate {
 
 // MARK: - NSCollectionViewDelegate
 
-extension SecondViewController: NSCollectionViewDataSource {
+extension SettingsViewController: NSCollectionViewDataSource {
     func collectionView(_ collectionView: NSCollectionView, numberOfItemsInSection section: Int) -> Int {
         return matrixService.getMatrix().count
     }
@@ -136,7 +174,7 @@ extension SecondViewController: NSCollectionViewDataSource {
 
 // MARK: - FileManagerServiceDelegate {
 
-extension SecondViewController: FileManagerServiceDelegate {
+extension SettingsViewController: FileManagerServiceDelegate {
     func fileURLDidChange(_ fileURL: URL) {
         pathControl.url = fileURL
     }
