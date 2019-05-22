@@ -12,6 +12,28 @@ enum PlayfairRule {
     case row, section, cross
 }
 
+enum PlayfairType {
+    case encryption, decryption
+    
+    var rowAddition: Int {
+        switch self {
+        case .encryption:
+            return 1
+        case .decryption:
+            return -1
+        }
+    }
+    
+    var rowMaximum: Int {
+        switch self {
+        case .encryption:
+            return 4
+        case .decryption:
+            return 0
+        }
+    }
+}
+
 protocol Encrypter {
     func encrypt(_ bigram: Bigram, with matrix: [Character]) -> Bigram
 }
@@ -26,7 +48,7 @@ protocol Encrypter {
 ///
 ///  OR becomes YZ  OR  -> BY       OR  -> ZX       OR  -> YZ
 
-final class PlayfairEncypter: Encrypter {
+final class PlayfairEncypter: PlayfairEnigma, Encrypter {
     func encrypt(_ bigram: Bigram, with matrix: [Character]) -> Bigram {
         var encryptedBigram = Bigram()
         
@@ -41,118 +63,12 @@ final class PlayfairEncypter: Encrypter {
             print(secondItemIndex)
             print("----------")
             
-            let encryptedBigramItem = performEncrypting(of: bigramItem, with: matrix, firstIndex: firstItemIndex, secondIndex: secondItemIndex)
+            let encryptedBigramItem = perform(.encryption, of: bigramItem, with: matrix, firstIndex: firstItemIndex, secondIndex: secondItemIndex)
             encryptedBigram.append(encryptedBigramItem)
             
             index += 1
         }
         
         return encryptedBigram
-    }
-    
-    // MARK: - Support methods
-    private func findFirstElementIndex(in matrix: [Character], from bigramItem: [Character]) -> IndexPath {
-        var indexPath = IndexPath(item: 0, section: 0)
-        var shouldStop = false
-        matrix.forEach({ ch in
-            if ch == bigramItem.first! { shouldStop = true }
-            else if !shouldStop {
-                indexPath.item += 1
-                if indexPath.item == 5 {
-                    indexPath.item = 0
-                    indexPath.section += 1
-                }
-            }
-        })
-        
-        return indexPath
-    }
-    
-    private func findSecondElementIndex(in matrix: [Character], from bigramItem: [Character]) -> IndexPath {
-        var indexPath = IndexPath(item: 0, section: 0)
-        var shouldStop = false
-        matrix.forEach({ ch in
-            if ch == bigramItem[1] { shouldStop = true }
-            else if !shouldStop {
-                indexPath.item += 1
-                if indexPath.item == 5 {
-                    indexPath.item = 0
-                    indexPath.section += 1
-                }
-            }
-        })
-        
-        return indexPath
-    }
-    
-    private func performEncrypting(of bigramItem: [Character], with matrix: [Character], firstIndex: IndexPath, secondIndex: IndexPath) -> [Character] {
-        var encryptedBigram = bigramItem
-        var rule: PlayfairRule!
-        
-        if firstIndex.section == secondIndex.section {
-            rule = .section
-        }
-        else if firstIndex.item == secondIndex.item {
-            rule = .row
-        }
-        else {
-            rule = .cross
-        }
-        
-        switch rule! {
-        case .section, .row:
-            let firstMatrixIndex = getMatrixIndex(from: firstIndex, for: rule)
-            let secondMatirxIndex = getMatrixIndex(from: secondIndex, for: rule)
-            
-            if firstMatrixIndex > secondMatirxIndex {
-                encryptedBigram[0] = matrix[firstMatrixIndex]
-                encryptedBigram[1] = matrix[secondMatirxIndex]
-            }
-            else {
-                encryptedBigram[1] = matrix[firstMatrixIndex]
-                encryptedBigram[0] = matrix[secondMatirxIndex]
-            }
-            
-        default:
-            let indexes = getCrossIndexes(from: firstIndex, and: secondIndex)
-            
-            encryptedBigram[0] = matrix[indexes.first]
-            encryptedBigram[1] = matrix[indexes.second]
-        }
-        
-        return encryptedBigram
-    }
-    
-    private func getMatrixIndex(from bigramIndex: IndexPath, for rule: PlayfairRule) -> Int {
-        switch rule {
-        case .section:
-            if bigramIndex.item == 4 {
-                return bigramIndex.section * 5
-            }
-            else {
-                return (bigramIndex.item + 1) + bigramIndex.section * 5
-            }
-        case .row:
-            if bigramIndex.section == 4 {
-                return bigramIndex.item
-            }
-            else {
-                return (bigramIndex.section + 1) * 5 + bigramIndex.item
-            }
-        case .cross: return bigramIndex.section * 5 + bigramIndex.item
-        }
-    }
-    
-    func getCrossIndexes(from firstBigramIndex: IndexPath, and secondBigramIndex: IndexPath) -> (first: Int, second: Int) {
-        let firstIndexPath = IndexPath(item: secondBigramIndex.item, section: firstBigramIndex.section)
-        let secondIndexPath = IndexPath(item: firstBigramIndex.item, section: secondBigramIndex.section)
-        
-        let firstIndex = getMatrixIndex(from: firstIndexPath, for: .cross)
-        let secondIndex = getMatrixIndex(from: secondIndexPath, for: .cross)
-        
-        if firstIndexPath.section < secondIndexPath.section {
-            return (first: firstIndex, second: secondIndex)
-        }
-        return (first: secondIndex, second: firstIndex)
     }
 }

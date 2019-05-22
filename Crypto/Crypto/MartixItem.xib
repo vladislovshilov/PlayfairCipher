@@ -29,8 +29,6 @@
             </subviews>
             <constraints>
                 <constraint firstItem="i07-Nr-EKj" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="8" id="6TL-f6-48B"/>
-                <constraint firstItem="i07-Nr-EKj" firstAttribute="centerY" secondItem="Hz6-mo-xeY" secondAttribute="centerY" id="B12-N6-lDl"/>
-                <constraint firstItem="i07-Nr-EKj" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="R27-Hl-c6I"/>
                 <constraint firstAttribute="trailing" secondItem="i07-Nr-EKj" secondAttribute="trailing" constant="8" id="n7L-U4-NGt"/>
                 <constraint firstItem="i07-Nr-EKj" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="8" id="qhh-KO-Q2U"/>
                 <constraint firstAttribute="bottom" secondItem="i07-Nr-EKj" secondAttribute="bottom" constant="8" id="rSk-2l-u99"/>

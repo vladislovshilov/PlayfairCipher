@@ -32,6 +32,13 @@ class EncryptViewController: NSViewController {
         print("Encrypter result:")
         print(encryptedString)
         print("------------------")
+        
+        let decrypter = PlayfairDecrypter()
+        let decryptedString = decrypter.decrypt(encryptedString, with: matrix)
+        
+        print("Decrypted result:")
+        print(decryptedString)
+        print("------------------")
     }
     
 }

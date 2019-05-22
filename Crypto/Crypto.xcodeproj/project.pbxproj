@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		511157F322960F2B00E6599F /* PlayfairEnigma.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511157F222960F2B00E6599F /* PlayfairEnigma.swift */; };
 		511E658222935052003E221E /* FileManagerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511E658122935052003E221E /* FileManagerService.swift */; };
 		511E65862293574F003E221E /* MatrixService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511E65852293574F003E221E /* MatrixService.swift */; };
 		511E658A2293593D003E221E /* PlayfairDecrypter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511E65892293593D003E221E /* PlayfairDecrypter.swift */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		511157F222960F2B00E6599F /* PlayfairEnigma.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayfairEnigma.swift; sourceTree = "<group>"; };
 		511E658122935052003E221E /* FileManagerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerService.swift; sourceTree = "<group>"; };
 		511E65852293574F003E221E /* MatrixService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatrixService.swift; sourceTree = "<group>"; };
 		511E65892293593D003E221E /* PlayfairDecrypter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayfairDecrypter.swift; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 		511E65872293591A003E221E /* Cypher */ = {
 			isa = PBXGroup;
 			children = (
+				511157F222960F2B00E6599F /* PlayfairEnigma.swift */,
 				511E658B22935944003E221E /* PlayfairEncrypter.swift */,
 				511E65892293593D003E221E /* PlayfairDecrypter.swift */,
 			);
@@ -241,6 +244,7 @@
 				511E658222935052003E221E /* FileManagerService.swift in Sources */,
 				511E6590229359EA003E221E /* DecryptViewController.swift in Sources */,
 				5196DE8E220A11090062CA3C /* SecondViewController.swift in Sources */,
+				511157F322960F2B00E6599F /* PlayfairEnigma.swift in Sources */,
 				51D6B3CC2291FDE6003F8F9E /* MartixItem.swift in Sources */,
 				51B5CD552208F7BC00AC5D5A /* AppDelegate.swift in Sources */,
 				511E659622935CB4003E221E /* Bigram.swift in Sources */,
